@@ -11,5 +11,6 @@ Rails.application.routes.draw do
       get :search_categories
     end
   end
+  resources :requests
 
 end
