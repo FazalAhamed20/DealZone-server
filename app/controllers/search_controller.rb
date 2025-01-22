@@ -3,7 +3,11 @@ class SearchController < ApplicationController
     query = params[:query]
     user = current_user
     puts "search",user
-    @results = Product.where("name ILIKE ?", "%#{query}%").where.not(user_id:user)
+    @results = Product.includes(:requests)
+    .where("name ILIKE '%#{query}%'")
+    .where.not(user_id: user)
+    .where.not(id: Request.where(user_id: user).select(:product_id))
+
     if @results
       render json: @results
     else
@@ -16,7 +20,7 @@ class SearchController < ApplicationController
   def my_product_search
     query = params[:query]
     user = current_user
-    @results = Product.where("name ILIKE ?", "%#{query}%").where(user_id:user)
+    @results = Product.where("name ILIKE '%#{query}%'").where(user_id:user)
     if @results
       render json: @results
     else

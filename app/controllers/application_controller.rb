@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
   include Clearance::Controller
 
   def encode_token(payload)
-    JWT.encode(payload, 'hellomars1211') 
+    JWT.encode(payload, 'fazalahamed123') 
 end
 
 def decoded_token
@@ -11,7 +11,7 @@ def decoded_token
         token = header.split(" ")[1]
         puts "token",token
         begin
-            JWT.decode(token, 'hellomars1211')
+            JWT.decode(token, 'fazalahamed123')
         rescue JWT::DecodeError
             nil
         end

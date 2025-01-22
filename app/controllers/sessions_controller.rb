@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
             response.headers['Authorization'] = @token
             render json: { user: { _id: @user.id, email: @user.email, username: @user.username }, message: "Login successfully" }, status: :ok
         else
-            render json: { user: { message: "Login unsuccessfully" } }, status: :unprocessable_entity
+            render json: { user: { message: "Password incorrect" } }, status: :unauthorized
         end
     end
     

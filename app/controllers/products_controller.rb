@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
-    # before_action :authorized
+    before_action :authorized
     def index
         user = current_user
         @products = Product.includes(:requests)
         .where.not(user_id: user)
-        .where.not(id: Request.select(:product_id).where(user_id: user))
+        .where.not(id: Request.select(:product_id).where(user_id: user).where(status:["accepted", "pending"]))
  
         
         if @products
@@ -47,8 +47,8 @@ class ProductsController < ApplicationController
     def my_products
         user = current_user
         @products = Product.where(user_id:user)
-        @requests = Request.includes(:product).all
-        render json: { products: @products,requests:@requests, message: "My Product fetched successfully" }, status: :ok
+        @requests = Request.includes(:product).order(created_at: :desc).all
+        render json: { products: @products.as_json(include: :requests),requests: @requests.as_json(include:{product:{include: :user}}), message: "My Product fetched successfully" }, status: :ok
 
     end
     def search_categories
