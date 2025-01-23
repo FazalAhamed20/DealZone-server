@@ -6,15 +6,13 @@ class SearchController < ApplicationController
     @results = Product.includes(:requests)
     .where("name ILIKE '%#{query}%'")
     .where.not(user_id: user)
-    .where.not(id: Request.where(user_id: user).select(:product_id))
+    .where.not(id: Request.where(user_id: user).where.not(status:"rejected").select(:product_id))
 
     if @results
       render json: @results
     else
       render json: []
     end
-   
-   
   end
 
   def my_product_search
@@ -27,4 +25,9 @@ class SearchController < ApplicationController
       render json: []
     end
   end
+end
+
+
+def category_search
+
 end

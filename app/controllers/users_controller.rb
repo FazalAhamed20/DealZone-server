@@ -20,6 +20,7 @@ class UsersController < ApplicationController
     private
 
     def validate_user_params
+      puts params
       params.require(:user).permit(:email, :password, :username)
     end
 end
