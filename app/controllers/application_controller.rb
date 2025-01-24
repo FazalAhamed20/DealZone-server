@@ -1,5 +1,9 @@
+require 'pagy'
+require 'pagy/extras/metadata'
 class ApplicationController < ActionController::API
   include Clearance::Controller
+  include Pagy::Backend
+  
 
   def encode_token(payload)
     JWT.encode(payload, 'fazalahamed123') 

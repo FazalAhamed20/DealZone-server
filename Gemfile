@@ -48,5 +48,6 @@ group :development, :test do
 end
 gem "clearance"
 gem "jwt"
+gem 'pagy', '~> 9.1'
 
 

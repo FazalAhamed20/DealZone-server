@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get "search/index"
   get "search/my_product_search"
+  get "search/category_search"
+    get "search/filter_search"
   resources :session, controller: "sessions", only: [ :create ]
   delete '/logout', to: 'sessions#destroy'
 
