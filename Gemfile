@@ -49,5 +49,5 @@ end
 gem "clearance"
 gem 'pagy', '~> 9.1'
 gem 'faker'
-
+gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
 

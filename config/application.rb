@@ -8,6 +8,12 @@ Bundler.require(*Rails.groups)
 
 module Server
   class Application < Rails::Application
+
+
+    # Load .env file in development and test environments
+if Rails.env.development? || Rails.env.test?
+  Dotenv::Railtie.load
+end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 

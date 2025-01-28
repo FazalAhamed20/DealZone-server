@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < Clearance::UsersController
   def form_authenticity_token; end
     def create
         existing_user = User.find_by(email: validate_user_params[:email])
@@ -6,17 +6,8 @@ class UsersController < ApplicationController
             render json: { message: "User Already exist" }, status: :conflict
         else
             @user = User.new(validate_user_params)
-            puts ".......",@user
             if @user.save
               sign_in(@user)
-            # @token = @user.remember_token
-            # response.set_cookie(
-            #     :token,
-            #     {
-            #       value: @token,
-            #       httponly: true,
-            #     }
-            #   )
               render json: { user: { _id: @user.id, email: @user.email, username: @user.username }, message: "Created successfully" }, status: :created
             else
               render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
