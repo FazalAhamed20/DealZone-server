@@ -47,7 +47,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 gem "clearance"
-gem "jwt"
 gem 'pagy', '~> 9.1'
+gem 'faker'
 
 

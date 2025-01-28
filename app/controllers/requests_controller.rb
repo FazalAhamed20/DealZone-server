@@ -3,13 +3,14 @@ class RequestsController < ApplicationController
 
   def index
     user = current_user
-    @requests = Request.where(user_id:user)
+    @requests = Request.where(user_id:user.id)
     render json: {requests:@requests.as_json(include: :product), message:"Request fetched successfull"},status: :ok
   end
     def create
         @request = Request.new(validate_request)
         user = current_user
-        @request.user_id = user
+    
+        @request.user_id = user.id
         @request.status = "pending"
         if @request.save
          render json: { message: "Request send successfully" }, status: :ok
