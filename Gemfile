@@ -47,7 +47,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 gem "clearance"
-gem 'pagy', '~> 9.1'
+gem 'pagy', '~> 9.3'
 gem 'faker'
 gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
 
